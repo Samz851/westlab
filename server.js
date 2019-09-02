@@ -23,6 +23,6 @@ app.get('*', function(req, res, err){
 });
 
 var server = app.listen(process.env.PORT || 3100, function(){
-    var port = this.address().port;
+    var port = this.address().port; 
     console.log ('App server listening on port ' + port);
 });
