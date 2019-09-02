@@ -1,0 +1,11 @@
+.*
+*.iml
+!.gitignore
+!.dockerignore
+!.yo-rc.json
+target
+dist
+node_modules
+bin
+logs
+.env
