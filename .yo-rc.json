@@ -1,0 +1,16 @@
+{
+  "generator-webpack-angularjs": {
+    "app": "westlab",
+    "module": "WPA",
+    "services": [
+      "LoginSvc"
+    ],
+    "directives": [
+      "titlecase"
+    ],
+    "states": [
+      "login",
+      "home"
+    ]
+  }
+}
