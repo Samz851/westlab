@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const dotenv = require('dotenv');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // fail if API_HOST is not set
 dotenv.config({ silent: false });
@@ -57,12 +58,15 @@ let webpackConfig = {
   },
   plugins: [
     new CleanWebpackPlugin(outDir),
+    new CopyWebpackPlugin([
+      {from:'src/img', to: "img"} 
+    ]),
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
       "window.jQuery": "jquery",
       Popper: ['popper.js', 'default']
-    })
+    }),
   ],
   devtool: isProdBuild ? 'source-map' : '#inline-source-map',
   devServer: {

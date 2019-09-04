@@ -3,9 +3,12 @@ var app = express();
 var logger = require('morgan');
 var fs = require('fs');
 var router = express.Router();
-var routes = require('./api.js')(router);
+const AWS = require('aws-sdk');
+var routes = require('./api.js')(router, AWS);
 var bodyParser = require('body-parser');
 var path = require('path');
+const dotenv = require('dotenv');
+dotenv.config();
 // var autoIncrement = require('mongoose-auto-increment');
 
 //middleware
@@ -15,6 +18,7 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true}));
 // app.use(express.static(__dirname + '/public'));
 app.use('/api',routes);
+app.use(express.static(__dirname + '/dist'));
 
     
 // Routes
