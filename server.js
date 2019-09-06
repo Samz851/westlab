@@ -18,8 +18,7 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true}));
 // app.use(express.static(__dirname + '/public'));
 app.use('/api',routes);
-app.use(express.static(__dirname + '/dist'));
-
+app.use('/', express.static(__dirname + '/dist'));
     
 // Routes
 app.get('*', function(req, res, err){
