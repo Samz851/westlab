@@ -3,7 +3,7 @@ var angular = require('angular');
 
 require('../css/login.css')
 
-function loginCtrl($scope, $sessionStorage, $state, $filter, LoginSvc, DBSvc) {
+function loginCtrl($scope, $sessionStorage, $state, $filter, LoginSvc) {
   $scope.progress = false;
   $scope.title = 'westlab'
   $scope.copyrightYear = new Date().getFullYear();
@@ -42,8 +42,7 @@ loginCtrl.$inject = [
   '$sessionStorage',
   '$state',
   '$filter',
-  'LoginSvc',
-  'DBSvc'
+  'LoginSvc'
 ]
 
 function routeConfig($stateProvider) {

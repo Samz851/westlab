@@ -70,24 +70,6 @@ module.exports = function(router, AWS){
     });
     router.post('/adduser', (req, res) => {
         // Configure the region
-        AWS.config.update({accessKeyId: process.env.AWS_ID , secretAccessKey: process.env.AWS_SECRET});
-        AWS.config.region = 'us-west-2';  //us-west-2 is Oregon
-        let docClient = new AWS.DynamoDB.DocumentClient();
-        var cipher = crypto.createCipher(algorithm, process.env.CRY_KEY);  
-        var encrypted = cipher.update("R@w@n851", 'utf8', 'hex') + cipher.final('hex');
-        var params = {
-            TableName : "adminusers",
-            Item: {
-                aid: 1,
-                team: 'westlabSM85',
-                name: 'Oscar Wylde',
-                pass: encrypted,
-            }
-        };
-        docClient.put(params, (err, data) => {
-            if(err) console.log(err);
-            console.log(data);
-        })
     });
     router.post('/add-application', (req, res) => {
         // Configure the region
