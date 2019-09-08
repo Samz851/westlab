@@ -3,10 +3,11 @@ var angular = require('angular');
 
 require('../css/home.css')
 
-function homeCtrl($scope, $sessionStorage, $state, $filter, LoginSvc) {
+function homeCtrl($scope, $sessionStorage, $state, $filter, LoginSvc, ApplicationSvc) {
   $scope.title = 'westlab';
   $scope.navBar = require('../includes/navbar.html');
-  $scope.applicationData = {};
+  $scope.applicationData = {0: {}};
+  $scope.applicantData = {}
   $scope.links = $state.get()
     .filter(x => x.name.startsWith('home.'))
     .map(x => {
@@ -34,18 +35,52 @@ function homeCtrl($scope, $sessionStorage, $state, $filter, LoginSvc) {
   //   ["1012","taciti","sociosqu","ad","litora"],
   //   ["1013","torquent","per","conubia","nostra"]
   // ]
-    $scope.equipments = 1;
-    $scope.equipmentCount = function(){
-      return Array($scope.equipments);
-    }
-    $scope.moreEqu = function(){
-      $scope.equipments++ ;
-      $scope.equipmentCount();
-    }
+
+  // //SAM Equipments block
+  //   $scope.equipments = 1;
+  //   $scope.equipmentCount = function(){
+  //     return Array($scope.equipments);
+  //   }
+  //   $scope.moreEqu = function(){
+  //     $scope.equipments++ ;
+  //     $scope.equipmentCount();
+  //   }
+
+  // //SAM Consumables block
+  // $scope.consumables = 1;
+  // $scope.consumeCount = function(){
+  //   return Array($scope.consumables);
+  // }
+  // $scope.moreCon = function(){
+  //   $scope.consumables++ ;
+  //   $scope.consumeCount();
+  // }
+
+  //SAM Process block
+  $scope.processes = {0: 1};
+  $scope.procCount = function(index){
+    let v = (typeof $scope.processes[index] !== 'undefined' && $scope.processes[index] > 0) ? $scope.processes[index] : 1;
+    $scope.processes[index] = v;
+    return Array(v);
+  }
+  $scope.morePro = function(index){
+    $scope.processes[index]++ ;
+    $scope.procCount(index);
+  }
+
+  //SAM Method block
+  $scope.methods = 1;
+  $scope.methodCount = function(){
+    return Array($scope.methods);
+  }
+  $scope.moreMethod = function(){
+    $scope.methods++ ;
+    $scope.methodCount();
+  }
+
   $scope.signout = signout;
   $scope.submitApplication = function(){
-    console.log($scope);
-    console.log($scope.applicationData);
+    ApplicationSvc.submitApp($scope.applicationData, $scope.applicantData);
   }
 
   function signout(){
@@ -67,7 +102,8 @@ homeCtrl.$inject = [
   '$sessionStorage',
   '$state',
   '$filter',
-  'LoginSvc'
+  'LoginSvc',
+  'ApplicationSvc'
 ]
 
 function routeConfig($stateProvider) {

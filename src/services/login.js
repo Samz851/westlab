@@ -2,9 +2,9 @@
 
 function LoginSvc($http, $sessionStorage, WPAConstants){
 
-  function login(username, password) {
+  function login(team, password) {
     
-    return $http.post(WPAConstants.loginUrl, {email: username, pass: password})
+    return $http.post(WPAConstants.loginUrl, {team: team, pass: password})
     .then(res => {
           let ret = res.data || {};
           if ( res.status == 200 ) {

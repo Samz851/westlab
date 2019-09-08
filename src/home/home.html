@@ -9,78 +9,49 @@
     <h1>Lab Workflow Application</h1>
     <form name="processForm" ng-submit="submitApplication()">
       <div class="applicant-info">
-        <div class="applicant-info-box">
-          <p><strong>Applicant: </strong> {{ applicant.name }}</p>
-          <p><strong>Contact: </strong> {{ applicant.contact }}</p>
-          <p><strong>Phone: </strong> {{ applicant.phone }}</p>
+        <div class="applicant-info-box row">
+            <div class="form-group col-sm-6">
+                <label for="" class="col-sm-4 col-form-label">Applicant:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" name="" placeholder="Applicant Name" ng-model="applicantData.name">
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="" class="col-sm-4 col-form-label">Contact:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" name="" placeholder="Applicant Contact Person" ng-model="applicantData.contact">
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="" class="col-sm-4 col-form-label">Phone:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" name="" placeholder="Applicant Phone" ng-model="applicantData.phone">
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="" class="col-sm-4 col-form-label">Email:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" name="" placeholder="Applicant Email" ng-model="applicantData.email">
+                </div>
+            </div>
         </div>
       </div>
-      <div class="form-group">
-        <div class="form-method"></div>
-          <h4>Method {{ methodCount }}</h4>
-          <div class="col-xs-12 row">
+      <div class="form-method" ng-repeat="m in methodCount() track by $index">
+          <h4>Method {{ $index+1 }}</h4>
+          <div class="col-xs-12 method-info row">
             <label for="samplesDay" class="col-sm-4 col-form-label">Average Samples Per Day</label>
             <div class="col-sm-8">
-              <input type="number" class="form-control" name="samplesDay" placeholder="00">
+              <input type="number" class="form-control" name="samplesDay" placeholder="00" ng-model="applicationData[$index].samplesCount">
             </div>
           </div>
-  
+          <div wpaprocess application-data="applicationData[$parent.$index][$index]" ng-repeat="i in procCount($index) track by $index"></div>
+          <div class="add-more-processes">
+            <a ng-click="morePro($index)">Add more processes? <i class="fas fa-plus"></i></a>
+          </div>
       </div>
-      <div class="process-box">
-        <div class="form-group row">
-          <label for="processName" class="col-sm-2 col-form-label">Process Name</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="processName" ng-model="applicationData.processName" placeholder="Process Name">
-          </div>
-        </div>
-        <div class="process-info row">
-              <div class="form-group col-sm-6">
-                <div class="row">
-                    <label for="numberStaff" class="col-sm-8 col-form-label">Number of Staff</label>
-                    <div class="col-sm-4">
-                      <input type="number" class="form-control" name="numberStaff" placeholder="00">
-                    </div>
-                </div>
-              </div>
-              <div class="form-group col-sm-6">
-                <div class="row">
-                    <label for="linearSpace" class="col-sm-8 col-form-label">Linear Space Required (mm)</label>
-                    <div class="col-sm-4">
-                      <input type="number" class="form-control" name="linearSpace" placeholder="00">
-                    </div>
-                </div>
-              </div>
-              <div class="form-group col-sm-6">
-                <div class="row">
-                    <label for="workstations" class="col-sm-8 col-form-label">Number of Workstations</label>
-                    <div class="col-sm-4">
-                      <input type="number" class="form-control" name="workstations" placeholder="00">
-                    </div>
-                </div>
-              </div>
-              <div class="form-group col-sm-6">
-                <div class="row">
-                    <label for="stools" class="col-sm-8 col-form-label">Number of Stools</label>
-                    <div class="col-sm-4">
-                      <input type="number" class="form-control" name="stools" placeholder="00">
-                    </div>
-                </div>
-              </div>
-        </div>
-        <div class="form-group row req-equ">
-          <div class="col-sm-6">
-            <div class="req-equ-single" ng-repeat="i in equipmentCount() track by $index">
-                <label for="equ" class="col-sm-6 col-form-label">Equipment Required</label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" name="equ" placeholder="Brand of Equipment" ng-model="applicationData.equipment[$index + 1]">
-                </div>
-            </div>
-            <div class="add-more-equ" ng-click="moreEqu()">More Equipments? + </div>
-          </div>
+        <button type="click" ng-click="moreMethod()" class="btn btn-info">Add more Methods? <i class="fas fa-plus"></i></a>
 
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary btn-lg float-right">Submit</button>
     </form>
   </div>
   <div WPA-table data="tableData"></div>

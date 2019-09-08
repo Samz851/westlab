@@ -11,7 +11,7 @@ function loginCtrl($scope, $sessionStorage, $state, $filter, LoginSvc, DBSvc) {
   $scope.submitForm = function(isValid){
     if ( isValid ) {
       $scope.progress = true;
-      LoginSvc.login($scope.username, $scope.password)
+      LoginSvc.login($scope.team, $scope.password)
         .then(res => {
           $scope.progress = false;
           if ( res.authenticated ) {

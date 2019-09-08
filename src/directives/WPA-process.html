@@ -1,0 +1,81 @@
+<div class="process-box">
+    <div class="form-group row">
+      <label for="processName" class="col-sm-2 col-form-label">Process Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="processName" ng-model="applicationData.processName" placeholder="Process Name">
+      </div>
+    </div>
+    <div class="process-info row">
+          <div class="form-group col-sm-6">
+            <div class="row">
+                <label for="numberStaff" class="col-sm-8 col-form-label">Number of Staff</label>
+                <div class="col-sm-4">
+                  <input type="number" class="form-control" name="numberStaff" placeholder="00">
+                </div>
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <div class="row">
+                <label for="linearSpace" class="col-sm-8 col-form-label">Linear Space Required (mm)</label>
+                <div class="col-sm-4">
+                  <input type="number" class="form-control" name="linearSpace" placeholder="00">
+                </div>
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <div class="row">
+                <label for="workstations" class="col-sm-8 col-form-label">Number of Workstations</label>
+                <div class="col-sm-4">
+                  <input type="number" class="form-control" name="workstations" placeholder="00">
+                </div>
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <div class="row">
+                <label for="stools" class="col-sm-8 col-form-label">Number of Stools</label>
+                <div class="col-sm-4">
+                  <input type="number" class="form-control" name="stools" placeholder="00">
+                </div>
+            </div>
+          </div>
+    </div>
+    <div class="form-group row req-equ">
+      <div class="col-sm-6">
+        <div class="req-equ-single" ng-repeat="i in equipmentCount() track by $index">
+            <label for="equ" class="col-sm-6 col-form-label">Equipment Required</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="equ" placeholder="Brand of Equipment" ng-model="applicationData.equipment[$index + 1]">
+            </div>
+        </div>
+        <div class="add-more-equ" ng-click="moreEqu()">More Equipments? + </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="req-equ-single" ng-repeat="i in consumeCount() track by $index">
+            <label for="con" class="col-sm-6 col-form-label">Consumables Required</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="con" placeholder="Name of Consumable" ng-model="applicationData.consumables[$index + 1]">
+            </div>
+        </div>
+        <div class="add-more-equ" ng-click="moreCon()">More Consumables? + </div>
+      </div>
+    </div>
+    <div class="process-time row">
+      <div class="form-group col-sm-6">
+        <div class="row">
+            <label for="protime" class="col-sm-8 col-form-label">Average Process Time (Min)</label>
+            <div class="col-sm-4">
+              <input type="number" class="form-control" name="protime" placeholder="00">
+            </div>
+        </div>
+      </div>
+      <div class="form-group col-sm-6">
+        <div class="row">
+            <label for="waitime" class="col-sm-8 col-form-label">Average Waiting Time to next Process (Min)</label>
+            <div class="col-sm-4">
+              <input type="number" class="form-control" name="waitime" placeholder="00">
+            </div>
+        </div>
+      </div>
+    </div>
+
+  </div>

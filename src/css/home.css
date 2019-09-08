@@ -1,3 +1,15 @@
 .starter-template {
   /* text-align: center; */
 }
+.form-method h4 {
+  text-align: center;
+}
+.form-method {
+  background: #e9ecef;
+  padding: 15px 20px;
+}
+.process-box {
+  margin: 15px;
+  padding: 15px 20px;
+  background: #f8f9fa;
+}

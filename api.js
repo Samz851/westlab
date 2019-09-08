@@ -9,11 +9,11 @@ module.exports = function(router, AWS){
         AWS.config.region = 'us-west-2';  //us-west-2 is Oregon
 
 
-        var {email, pass} = req.body;
+        var {team, pass} = req.body;
 
         let docClient = new AWS.DynamoDB.DocumentClient();
 
-        console.log(email + ' ' + pass);
+        console.log(team + ' ' + pass);
         // console.log(process.env.AWS_ID);
 
         // let params = {
@@ -24,9 +24,9 @@ module.exports = function(router, AWS){
         //     }
         // }
         let params = {
-            TableName: 'applicants',
+            TableName: 'adminusers',
             Key:{
-                "email": email
+                "team": team
             }
         };
         docClient.get(params, (err, data) => {
@@ -37,7 +37,7 @@ module.exports = function(router, AWS){
                 var decrypted = decipher.update(data.Item.pass, 'hex', 'utf8') + decipher.final('utf8');
                 console.log(decrypted);
                 if(decrypted == pass ){
-                    res.json({success: true, user: {name: data.Item.applicant, email: email, phone: data.Item.phone, contact: data.Item.contact}});
+                    res.json({success: true, user: data.Item});
                 }
 
             }
@@ -76,21 +76,44 @@ module.exports = function(router, AWS){
         var cipher = crypto.createCipher(algorithm, process.env.CRY_KEY);  
         var encrypted = cipher.update("R@w@n851", 'utf8', 'hex') + cipher.final('hex');
         var params = {
-            TableName : "applicants",
+            TableName : "adminusers",
             Item: {
                 aid: 1,
-                email: 'sam@samiscoding.com',
-                applicant: 'SAM DevOps',
-                contact: 'Samer Alotaibi',
+                team: 'westlabSM85',
+                name: 'Oscar Wylde',
                 pass: encrypted,
-                phone: "6137161317"
             }
         };
         docClient.put(params, (err, data) => {
             if(err) console.log(err);
             console.log(data);
         })
-}); 
+    });
+    router.post('/add-application', (req, res) => {
+        // Configure the region
+
+        console.log(req.body)
+        AWS.config.update({accessKeyId: process.env.AWS_ID , secretAccessKey: process.env.AWS_SECRET});
+        AWS.config.region = 'us-west-2';  //us-west-2 is Oregon
+        let docClient = new AWS.DynamoDB.DocumentClient();
+        var applicantParams = {
+            TableName : "applicants",
+            Item: req.body.applicant
+        };
+        docClient.put(applicantParams, (err, data) => {
+            if(err) {
+                console.log(err);
+            }else{
+                // req.body.application.contact = req.body.applicant.contact;
+                
+                var applicationParams = {
+                    TableName : "applications",
+                    Item: req.body.application
+                };
+            }
+
+        })
+    });
 
 
 
