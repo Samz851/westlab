@@ -75,26 +75,26 @@ module.exports = function(router, AWS){
         // Configure the region
 
         console.log(req.body)
-        AWS.config.update({accessKeyId: process.env.AWS_ID , secretAccessKey: process.env.AWS_SECRET});
-        AWS.config.region = 'us-west-2';  //us-west-2 is Oregon
-        let docClient = new AWS.DynamoDB.DocumentClient();
-        var applicantParams = {
-            TableName : "applicants",
-            Item: req.body.applicant
-        };
-        docClient.put(applicantParams, (err, data) => {
-            if(err) {
-                console.log(err);
-            }else{
-                // req.body.application.contact = req.body.applicant.contact;
+        // AWS.config.update({accessKeyId: process.env.AWS_ID , secretAccessKey: process.env.AWS_SECRET});
+        // AWS.config.region = 'us-west-2';  //us-west-2 is Oregon
+        // let docClient = new AWS.DynamoDB.DocumentClient();
+        // var applicantParams = {
+        //     TableName : "applicants",
+        //     Item: req.body.applicant
+        // };
+        // docClient.put(applicantParams, (err, data) => {
+        //     if(err) {
+        //         console.log(err);
+        //     }else{
+        //         // req.body.application.contact = req.body.applicant.contact;
                 
-                var applicationParams = {
-                    TableName : "applications",
-                    Item: req.body.application
-                };
-            }
+        //         var applicationParams = {
+        //             TableName : "applications",
+        //             Item: req.body.application
+        //         };
+        //     }
 
-        })
+        // })
     });
 
 
