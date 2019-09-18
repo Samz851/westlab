@@ -4,12 +4,19 @@ var logger = require('morgan');
 var fs = require('fs');
 var router = express.Router();
 const AWS = require('aws-sdk');
-var routes = require('./api.js')(router, AWS);
 var bodyParser = require('body-parser');
 var path = require('path');
 const dotenv = require('dotenv');
+var routes = require('./api.js')(router);
 dotenv.config();
 // var autoIncrement = require('mongoose-auto-increment');
+
+
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
 
 //middleware
 app.use(logger('dev'));

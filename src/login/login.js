@@ -13,8 +13,9 @@ function loginCtrl($scope, $sessionStorage, $state, $filter, LoginSvc) {
       $scope.progress = true;
       LoginSvc.login($scope.team, $scope.password)
         .then(res => {
+          console.log(res);
           $scope.progress = false;
-          if ( res.authenticated ) {
+          if ( res.success ) {
             $state.go('home');
           } else {
             $scope.message = res.message;

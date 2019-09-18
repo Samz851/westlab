@@ -3,6 +3,7 @@
 function ApplicationSvc($http, $sessionStorage, WPAConstants){
 
     function submitApp(application, applicant){
+      console.log(arguments);
         return $http.post(WPAConstants.submitApp, {application: application, applicant: applicant })
     }
 

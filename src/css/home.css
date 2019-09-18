@@ -13,3 +13,42 @@
   padding: 15px 20px;
   background: #f8f9fa;
 }
+.wl-add-more {
+  margin:15px;
+}
+.row.applicant-info {
+  background: #e9ecef;
+  margin: 15px 0px;
+}
+.row.applicant-info h6 {
+  border: 1px solid white;
+  padding: 15px;
+  text-align: center;
+}
+.row.application-data {
+  margin: 25px 0px;
+}
+.row.application-data .col-sm-12.totals {
+  padding: 20px;
+  margin-bottom: 15px;
+}
+.card.ng-scope {
+  text-align: center;
+  margin: 20px 10px;
+}
+table.table.table-striped.col-sm-5 {
+  margin: 20px 0px;
+}
+.row.totals.ng-scope {
+  padding: 20px 0px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid grey;
+}
+.pdf.generate.buttons {
+  position: absolute;
+  top: 50px;
+  right: 15px;
+}
+.result-input {
+  max-width: 50px;
+}
